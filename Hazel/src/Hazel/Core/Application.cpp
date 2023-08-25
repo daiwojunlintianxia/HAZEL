@@ -64,9 +64,9 @@ namespace Hazel {
 
 		//HZ_CORE_TRACE("{0}", e);
 
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); ) //事件反向遍历
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) //事件反向遍历
 		{
-			(*--it)->OnEvent(e);
+			(*it)->OnEvent(e);
 			if (e.Handled)
 				break;
 		}

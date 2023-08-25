@@ -8,6 +8,8 @@
 #include "Hazel/ImGui/ImGuiLayer.h"
 #include "Hazel/Core/Timestep.h"
 
+int main(int argc, char** argv);
+
 namespace Hazel {
 
 	class Application
@@ -16,7 +18,6 @@ namespace Hazel {
 		Application();
 		virtual ~Application();
 
-		void Run();
 
 		void OnEvent(Event& e);
 
@@ -27,6 +28,7 @@ namespace Hazel {
 
 		inline static Application& Get() { return *s_Instance; }
 	private:
+		void Run();
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
 	private:
@@ -39,6 +41,7 @@ namespace Hazel {
 		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_Instance;
+		friend int ::main(int argc, char** argv);
 	};
 
 	Application* CreateApplication();
