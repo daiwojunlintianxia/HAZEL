@@ -13,17 +13,17 @@ namespace Hazel {
 		int length,
 		const char* message,
 		const void* userParam)
-	{
-		switch (severity)
 		{
-		case GL_DEBUG_SEVERITY_HIGH:         HZ_CORE_CRITICAL(message); return;
-		case GL_DEBUG_SEVERITY_MEDIUM:       HZ_CORE_ERROR(message); return;
-		case GL_DEBUG_SEVERITY_LOW:          HZ_CORE_WARN(message); return;
-		case GL_DEBUG_SEVERITY_NOTIFICATION: HZ_CORE_TRACE(message); return;
-		}
+			switch (severity)
+			{
+				case GL_DEBUG_SEVERITY_HIGH:         HZ_CORE_CRITICAL(message); return;
+				case GL_DEBUG_SEVERITY_MEDIUM:       HZ_CORE_ERROR(message); return;
+				case GL_DEBUG_SEVERITY_LOW:          HZ_CORE_WARN(message); return;
+				case GL_DEBUG_SEVERITY_NOTIFICATION: HZ_CORE_TRACE(message); return;
+			}
 
-		HZ_CORE_ASSERT(false, "Unknown severity level!");
-	}
+			HZ_CORE_ASSERT(false, "Unknown severity level!");
+		}
 
 	void OpenGLRendererAPI::Init()
 	{
@@ -61,7 +61,7 @@ namespace Hazel {
 
 	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount)
 	{
-		uint32_t count = indexCount ? vertexArray->GetIndexBuffer()->GetCount() : indexCount;
+		uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
